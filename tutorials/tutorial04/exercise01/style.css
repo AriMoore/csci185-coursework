@@ -1,0 +1,41 @@
+body {
+    font-family: Impact;
+    background-color: #929292;
+    text-align: center;
+}
+
+header {
+    background-color: #b4cded;
+    text-align: center;
+    font-family: Impact;
+}
+
+nav {
+    align-items: center;
+    text-align: center;
+    background-color: black;
+}
+
+a:link {
+    color: white;
+    text-decoration: none;
+    font-style: bold;
+}
+
+a:visited {
+    color: rgb(143, 142, 142);
+    text-decoration: none;
+    font-style: bold;
+}
+
+a:hover {
+    color: rgba(255, 255, 255, 0.836);
+    text-decoration: none;
+    font-style: bold;
+}
+
+a:active {
+    color: rgba(255, 255, 255, 0.144);
+    text-decoration: none;
+    font-style: bold;
+}
