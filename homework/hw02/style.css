@@ -38,14 +38,14 @@ header {
 }
 
 /* Uncomment to see borders:  */
-/* header, nav, article {
+header, nav, article {
     border: solid 5px teal;
     padding: 10px;
 }
 main {
     border: solid 5px hotpink;
     padding: 10px;
-} */
+}
 
 main {
     background: #111;
