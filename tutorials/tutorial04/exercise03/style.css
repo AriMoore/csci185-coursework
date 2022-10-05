@@ -11,4 +11,26 @@ body {
     margin: 0;
 }
 
-/* create additional rules below:  */
+#home, #bio, #portfolio, #contact {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    scroll-margin-top: 60px;
+    color: white;
+}
+
+#home {
+    background: beige;
+    color: gray;
+}
+#bio {
+    background: gold;
+}
+#portfolio {
+    background: crimson;
+}
+#contact {
+    background: black;
+}
