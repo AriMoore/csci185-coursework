@@ -1,3 +1,11 @@
+/*
+function drawCreaturearc(x, y, size, fillColorA, fillColorB, fillColorC='orange', fillColorD='black') {
+    fill(fillColorA);
+    arc(x, y*0.85, x*.75, y*.21, -9.425, -25.125, OPEN);
+    arc(x*.625, y, size*.2625, size*.375, -4.7, -14.15, OPEN);
+}
+*/
+
 function setup() {
     const canvasWidth = window.innerWidth;
     const canvasHeight = window.innerHeight; 
