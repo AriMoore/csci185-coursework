@@ -9,3 +9,10 @@ const restaurants = [
     { name: "Red Ginger Dimsum And Tapas", rating: 4.5, price: "$$", review_count: 1132, category: "sushi" },
     { name: "Murasaki Asheville", rating: 4.5, price: "$$", review_count: 23, category: "sushi" }
 ];
+
+for (let i = 0; i < restaurants.length; i++) {
+    if (restaurants[i].category == 'pizza') {
+        const template = `<p>${restaurants[i].name}<p>`;
+        document.querySelector("#output").insertAdjacentHTML('beforeend', template);
+    }
+}
