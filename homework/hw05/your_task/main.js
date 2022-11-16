@@ -13,26 +13,71 @@ function search (ev) {
 }
 
 async function getTracks (term) {
-    console.log(`
-        get tracks from spotify based on the search term
-        "${term}" and load them into the #tracks section 
-        of the DOM...`);
+    const tracksEndpoint = baseURL + "?q=" + term + "&type=track";
+    const data = await fetch(tracksEndpoint).then(response => response.json());
+    const image = 
+    `
+        <section class="artist-card" id="3Nrfpe0tUJi4K4DXYWgMUX">
+            <div>
+                <img src="${data[0].image_url}">
+                <h2>${data[0].name}</h2>
+                <div class="footer">
+                <a href="${data[0].spotify_url}" target="_blank">
+                    view on spotify
+                </a>
+                </div>
+            </div>
+        </section>
+    `
+    document.querySelector('#tracks').innerHTML = image;
+    console.log(tracksEndpoint, data);
 }
 
 async function getAlbums (term) {
-    console.log(`
-        get albums from spotify based on the search term
-        "${term}" and load them into the #albums section 
-        of the DOM...`);
+    const albumsEndpoint = baseURL + "?q=" + term + "&type=album";
+    const data = await fetch(albumsEndpoint).then(response => response.json());
+    const image = 
+    `
+        <section class="artist-card" id="3Nrfpe0tUJi4K4DXYWgMUX">
+            <div>
+                <img src="${data[0].image_url}">
+                <h2>${data[0].name}</h2>
+                <div class="footer">
+                <a href="${data[0].spotify_url}" target="_blank">
+                    view on spotify
+                </a>
+                </div>
+            </div>
+        </section>
+    `
+    document.querySelector('#tracks').innerHTML = image;
+    console.log(albumsEndpoint, data);
 }
 
 async function getArtist (term) {
-    console.log(`
-        get artists from spotify based on the search term
-        "${term}" and load the first artist into the #artist section 
-        of the DOM...`);
+    const artistEndpoint = baseURL + "?q=" + term + "&type=artist";
+    const data = await fetch(artistEndpoint).then(response => response.json());
+    if (data.length === 0) {
+        document.querySelector('#artist').innerHTML = "No results found.";
+        return;
+    }
+    const image = 
+    `
+        <section class="artist-card" id="3Nrfpe0tUJi4K4DXYWgMUX">
+            <div>
+                <img src="${data[0].image_url}">
+                <h2>${data[0].name}</h2>
+                <div class="footer">
+                <a href="${data[0].spotify_url}" target="_blank">
+                    view on spotify
+                </a>
+                </div>
+            </div>
+        </section>
+    `
+    document.querySelector('#artist').innerHTML = image;
+    console.log(artistEndpoint, data[0].name, data[0].image_url);
 };
-
 
 document.querySelector('#search').onkeyup = function (ev) {
     // Number 13 is the "Enter" key on the keyboard

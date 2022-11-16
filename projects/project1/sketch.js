@@ -25,6 +25,7 @@ let speed = 15;
 let score = 0;
 let win = false;
 let lose = false;
+let brickcount;
 let x = 0;
 let y = 0;
 let d = 50;
@@ -39,7 +40,7 @@ function setup() {
         }
         bricky += 30;
     }
-    console.log(bricks);
+    brickcount = 9*32;
 }
 
 function draw() {
@@ -54,11 +55,21 @@ function draw() {
             let verticalintersects = checkVerticalBrickIntersection(cell, ball);
             if (verticalintersects && cell.visible == true) {
                 cell.visible = false;
+                score += 1;
+                brickcount -= 1;
+                if (brickcount == 0) {
+                    win = true;
+                }
                 ball.speedY *= -1;
                 ball.y += ball.speedY;
             }
             if (horizontalintersects && cell.visible == true) {
                 cell.visible = false;
+                score += 1;
+                brickcount -= 1;
+                if (brickcount == 0) {
+                    win = true;
+                }
                 ball.speedX *= -1;
                 ball.x += ball.speedX;
             }
@@ -68,6 +79,7 @@ function draw() {
             }
         }
     }
+    console.log(score, brickcount, win, lose);
     //ball
     bounceIfIntersects(ball, player);
     move(ball); 
@@ -185,9 +197,15 @@ function move(ball) {
         ball.y += ball.speedY;
     }
     else if (ball.y + ball.d / 2 >= canvasHeight) {
+        lose = true;
+    }
+    //Enable this to enable bottom collision
+    /*
+    else if (ball.y + ball.d / 2 >= canvasHeight) {
         ball.speedY *= -1;
         ball.y += ball.speedY;
     }
+    */
 }
 
 function moveCharacter(ev) {
@@ -205,7 +223,21 @@ function moveCharacter(ev) {
         player.speed *= player.speed;
         player.x += speed;
     }
-    console.log(speed);
+}
+
+function checkWinCondition(win, lose) {
+    if (win == true) {
+        document.querySelector('#message').innerHTML = 'You win!'
+        document.querySelector('#condition').className = ''
+    }
+    else if (lose == true) {
+        document.querySelector('#message').innerHTML = 'You lose!'
+        document.querySelector('#condition').className = 'lose'
+    }
+    else {
+        document.querySelector('#message').innerHTML = ''
+        document.querySelector('#condition').className = 'gameactive'
+    }
 }
 
 document.addEventListener('keydown', moveCharacter);

@@ -175,8 +175,6 @@ header .fa-search {
     padding: 20px;
 }
 .artist-card img {
-    border-radius: 50%;
-    /* width: 100%; */
     margin: auto;
     max-height: 200px;
     max-width: 100%;
