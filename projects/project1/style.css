@@ -6,3 +6,19 @@ body {
 main {
     height: 100vh;
 }
+.hide {
+    display: none;
+}
+.showwin {
+    display: block;
+    position: absolute;
+    top: 40vh;
+    left: 40vw;
+}
+
+.showlose {
+    display: block;
+    position: absolute;
+    top: 40vh;
+    width: 400px;
+}

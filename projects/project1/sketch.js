@@ -25,6 +25,7 @@ let speed = 15;
 let score = 0;
 let win = false;
 let lose = false;
+let brickcount = bricks.length;
 let x = 0;
 let y = 0;
 let d = 50;
@@ -39,7 +40,7 @@ function setup() {
         }
         bricky += 30;
     }
-    console.log(bricks);
+    brickcount = 284;
 }
 
 function draw() {
@@ -56,11 +57,15 @@ function draw() {
                 cell.visible = false;
                 ball.speedY *= -1;
                 ball.y += ball.speedY;
+                brickcount -= 1;
+                score += 1;
             }
             if (horizontalintersects && cell.visible == true) {
                 cell.visible = false;
                 ball.speedX *= -1;
                 ball.x += ball.speedX;
+                brickcount -= 1;
+                score += 1;
             }
             if (cell.visible) {
                 fill(cell.color);
@@ -68,6 +73,37 @@ function draw() {
             }
         }
     }
+    if (brickcount === 0) {
+        win = true;
+    }
+    if (lose == true) {
+        fill('White');
+        text("You Lose", canvasWidth/2, canvasHeight/3);
+        textSize(22);
+        textFont('Helvetica');
+        textStyle(BOLD);
+        textAlign(CENTER, CENTER);
+        document.querySelector("#lose").className = "showlose";
+        document.querySelector('#lose').style.left = canvasWidth/2 - 200 + "px";
+    }
+    else if (win == true) {
+        fill('White');
+        text("You Win", canvasWidth/2, canvasHeight/2);
+        textSize(22);
+        textFont('Helvetica');
+        textStyle(BOLD);
+        textAlign(CENTER, CENTER);
+        document.querySelector("#win").className = "showwin";
+    }
+    else {
+        fill('White');
+        text("Score: "+score, canvasWidth/2, canvasHeight/2);
+        textSize(22);
+        textFont('Helvetica');
+        textStyle(BOLD);
+        textAlign(CENTER, CENTER);
+    }
+    console.log(win, lose);
     //ball
     bounceIfIntersects(ball, player);
     move(ball); 
@@ -184,9 +220,14 @@ function move(ball) {
         ball.speedY *= -1;
         ball.y += ball.speedY;
     }
+    /* Enable this to reenable floor collision
     else if (ball.y + ball.d / 2 >= canvasHeight) {
         ball.speedY *= -1;
         ball.y += ball.speedY;
+    }
+    */
+    else if (ball.y - 40 >= canvasHeight) {
+        lose = true;
     }
 }
 
@@ -205,7 +246,6 @@ function moveCharacter(ev) {
         player.speed *= player.speed;
         player.x += speed;
     }
-    console.log(speed);
 }
 
 document.addEventListener('keydown', moveCharacter);
