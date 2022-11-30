@@ -21,7 +21,7 @@ async function getTracks (term) {
     for (let i = 0; i < 5; i++) {
         const template = `
             <section class="track-item preview" onclick="playtrack('${data[i].id}')">
-                <img src="${data[i].album.image_url}">
+                <img alt="Photo of ${data[i].album.name}" src="${data[i].album.image_url}">
                 <i class="fas fa-play play-track" aria-hidden="true"></i>
                 <div class="label">
                     <h2>${data[i].name}</h2>
@@ -40,12 +40,13 @@ async function getAlbums (term) {
     console.log(albumsEndpoint);
     const data = await fetch(albumsEndpoint).then(response => response.json());
     console.log(data[0].name);
+    document.querySelector('#albums').innerHTML = "";
     for (let i = 0; i < data.length; i++) {
         const image = 
         `
             <section class="album-card" id="2lATw9ZAVp7ILQcOKPCPqp">
                 <div>
-                    <img src="${data[i].image_url}">
+                    <img alt="Photo of ${data[i].name}" src="${data[i].image_url}">
                     <h2>${data[i].name}</h2>
                     <div class="footer">
                         <a href="${data[i].spotify_url}" target="_blank">
