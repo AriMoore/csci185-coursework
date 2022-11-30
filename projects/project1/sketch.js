@@ -25,6 +25,7 @@ let speed = 15;
 let score = 0;
 let win = false;
 let lose = false;
+let brickcount;
 let brickcount = bricks.length;
 let x = 0;
 let y = 0;
@@ -55,6 +56,11 @@ function draw() {
             let verticalintersects = checkVerticalBrickIntersection(cell, ball);
             if (verticalintersects && cell.visible == true) {
                 cell.visible = false;
+                score += 1;
+                brickcount -= 1;
+                if (brickcount == 0) {
+                    win = true;
+                }
                 ball.speedY *= -1;
                 ball.y += ball.speedY;
                 brickcount -= 1;
@@ -62,6 +68,11 @@ function draw() {
             }
             if (horizontalintersects && cell.visible == true) {
                 cell.visible = false;
+                score += 1;
+                brickcount -= 1;
+                if (brickcount == 0) {
+                    win = true;
+                }
                 ball.speedX *= -1;
                 ball.x += ball.speedX;
                 brickcount -= 1;
@@ -103,7 +114,7 @@ function draw() {
         textStyle(BOLD);
         textAlign(CENTER, CENTER);
     }
-    console.log(win, lose);
+    console.log(score, brickcount, win, lose);
     //ball
     bounceIfIntersects(ball, player);
     move(ball); 
@@ -222,6 +233,11 @@ function move(ball) {
     }
     /* Enable this to reenable floor collision
     else if (ball.y + ball.d / 2 >= canvasHeight) {
+        lose = true;
+    }
+    //Enable this to enable bottom collision
+    /*
+    else if (ball.y + ball.d / 2 >= canvasHeight) {
         ball.speedY *= -1;
         ball.y += ball.speedY;
     }
@@ -245,6 +261,21 @@ function moveCharacter(ev) {
         }
         player.speed *= player.speed;
         player.x += speed;
+    }
+}
+
+function checkWinCondition(win, lose) {
+    if (win == true) {
+        document.querySelector('#message').innerHTML = 'You win!'
+        document.querySelector('#condition').className = ''
+    }
+    else if (lose == true) {
+        document.querySelector('#message').innerHTML = 'You lose!'
+        document.querySelector('#condition').className = 'lose'
+    }
+    else {
+        document.querySelector('#message').innerHTML = ''
+        document.querySelector('#condition').className = 'gameactive'
     }
 }
 

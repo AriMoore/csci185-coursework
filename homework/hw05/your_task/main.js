@@ -40,15 +40,9 @@ async function getAlbums (term) {
     console.log(albumsEndpoint);
     const data = await fetch(albumsEndpoint).then(response => response.json());
     console.log(data[0].name);
-}
-
-async function getArtist (term) {
-    const artistsEndpoint = baseURL + "?q=" + term + "&type=artist";
-    console.log(artistsEndpoint);
-    const data = await fetch(artistsEndpoint).then(response => response.json());
-    console.log(data[0]);
-    const template = `
-        <section class="artist-card" id="${data[0].artist}">
+    const image = 
+    `
+        <section class="album-card" id="2lATw9ZAVp7ILQcOKPCPqp">
             <div>
                 <img src="${data[0].image_url}">
                 <h2>${data[0].name}</h2>
@@ -59,9 +53,31 @@ async function getArtist (term) {
                 </div>
             </div>
         </section>
+    `;
+    document.querySelector('#albums').innerHTML = image;
+}
+
+async function getArtist (term) {
+    const artistsEndpoint = baseURL + "?q=" + term + "&type=artist";
+    console.log(artistsEndpoint);
+    const data = await fetch(artistsEndpoint).then(response => response.json());
+    console.log(data[0]);
+    const image = 
     `
-    document.querySelector('#artist').innerHTML = template
-};
+        <section class="artist-card" id="3Nrfpe0tUJi4K4DXYWgMUX">
+            <div>
+                <img alt="Photo of ${data[0].name}" src="${data[0].image_url}">
+                <h2>${data[0].name}</h2>
+                <div class="footer">
+                <a href="${data[0].spotify_url}" target="_blank">
+                    view on spotify
+                </a>
+                </div>
+            </div>
+        </section>
+    `
+    document.querySelector('#artist').innerHTML = image;
+}
 
 function playtrack(id) {
     const template = `
