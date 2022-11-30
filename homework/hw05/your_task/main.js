@@ -40,21 +40,23 @@ async function getAlbums (term) {
     console.log(albumsEndpoint);
     const data = await fetch(albumsEndpoint).then(response => response.json());
     console.log(data[0].name);
-    const image = 
-    `
-        <section class="album-card" id="2lATw9ZAVp7ILQcOKPCPqp">
-            <div>
-                <img src="${data[0].image_url}">
-                <h2>${data[0].name}</h2>
-                <div class="footer">
-                    <a href="${data[0].spotify_url}" target="_blank">
-                        view on spotify
-                    </a>
+    for (let i = 0; i < data.length; i++) {
+        const image = 
+        `
+            <section class="album-card" id="2lATw9ZAVp7ILQcOKPCPqp">
+                <div>
+                    <img src="${data[i].image_url}">
+                    <h2>${data[i].name}</h2>
+                    <div class="footer">
+                        <a href="${data[i].spotify_url}" target="_blank">
+                            view on spotify
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </section>
-    `;
-    document.querySelector('#albums').innerHTML = image;
+            </section>
+        `;
+        document.querySelector('#albums').insertAdjacentHTML('beforeend', image);
+    }
 }
 
 async function getArtist (term) {

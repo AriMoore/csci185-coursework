@@ -25,7 +25,6 @@ let speed = 15;
 let score = 0;
 let win = false;
 let lose = false;
-let brickcount;
 let brickcount = bricks.length;
 let x = 0;
 let y = 0;
