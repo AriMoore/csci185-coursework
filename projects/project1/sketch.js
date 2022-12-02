@@ -25,6 +25,7 @@ let speed = 15;
 let score = 0;
 let win = false;
 let lose = false;
+let level = 1;
 let brickcount = bricks.length;
 let x = 0;
 let y = 0;
@@ -40,6 +41,49 @@ function setup() {
         }
         bricky += 30;
     }
+    brickcount = 284;
+}
+
+function losereset() {
+    lose = false;
+    let ball = circleData[0];
+    for (let i = 0; i < 9; i++) {
+        let row = bricks[i];
+        for (let j = 0; j < 32; j++) {
+            let cell = row[j];
+            cell.visible = true;
+            if (cell.visible) {
+                fill(cell.color);
+                rect(cell.x, cell.y, cell.brickw, cell.brickh);
+            }
+        }
+    }
+    move(ball); 
+    fill(ball.color);
+    circle(ball.x, ball.y, ball.d);
+    level = 0;
+    score = 0;
+    brickcount = 284;
+}
+
+function winreset() {
+    win = false;
+    let ball = circleData[0];
+    for (let i = 0; i < 9; i++) {
+        let row = bricks[i];
+        for (let j = 0; j < 32; j++) {
+            let cell = row[j];
+            cell.visible = true;
+            if (cell.visible) {
+                fill(cell.color);
+                rect(cell.x, cell.y, cell.brickw, cell.brickh);
+            }
+        }
+    }
+    move(ball); 
+    fill(ball.color);
+    circle(ball.x, ball.y, ball.d);
+    level += 1;
     brickcount = 284;
 }
 
@@ -62,8 +106,6 @@ function draw() {
                 }
                 ball.speedY *= -1;
                 ball.y += ball.speedY;
-                brickcount -= 1;
-                score += 1;
             }
             if (horizontalintersects && cell.visible == true) {
                 cell.visible = false;
@@ -74,8 +116,6 @@ function draw() {
                 }
                 ball.speedX *= -1;
                 ball.x += ball.speedX;
-                brickcount -= 1;
-                score += 1;
             }
             if (cell.visible) {
                 fill(cell.color);
@@ -95,6 +135,19 @@ function draw() {
         textAlign(CENTER, CENTER);
         document.querySelector("#lose").className = "showlose";
         document.querySelector('#lose').style.left = canvasWidth/2 - 200 + "px";
+        fill('White');
+        text("Score: "+score, canvasWidth/3.4, canvasHeight/2);
+        text("Level: "+level, canvasWidth/1.4, canvasHeight/2);
+        textSize(22);
+        textFont('Helvetica');
+        textStyle(BOLD);
+        textAlign(CENTER, CENTER);
+        ball.x = 500;
+        ball.y = 550;
+        ball.speedX = 3;
+        ball.speedY = 3;
+        document.querySelector('#condition').className = 'gameactive'
+        losereset();       
     }
     else if (win == true) {
         fill('White');
@@ -104,21 +157,35 @@ function draw() {
         textStyle(BOLD);
         textAlign(CENTER, CENTER);
         document.querySelector("#win").className = "showwin";
-    }
-    else {
         fill('White');
-        text("Score: "+score, canvasWidth/2, canvasHeight/2);
+        text("Score: "+score, canvasWidth/3.4, canvasHeight/2);
+        text("Level: "+level, canvasWidth/1.4, canvasHeight/2.5);
         textSize(22);
         textFont('Helvetica');
         textStyle(BOLD);
         textAlign(CENTER, CENTER);
+        ball.x = 500;
+        ball.y = 550;
+        ball.speedX = 3;
+        ball.speedY = 3;
+        document.querySelector('#condition').className = 'gameactive'
+        winreset();
+    }
+    else {
+        fill('White');
+        text("Score: "+score, canvasWidth/2, canvasHeight/2);
+        text("Level: "+level, canvasWidth/2, canvasHeight/1.5);
+        textSize(22);
+        textFont('Helvetica');
+        textStyle(BOLD);
+        textAlign(CENTER, CENTER);
+        move(ball); 
+        fill(ball.color);
+        circle(ball.x, ball.y, ball.d);
     }
     console.log(score, brickcount, win, lose);
     //ball
     bounceIfIntersects(ball, player);
-    move(ball); 
-    fill(ball.color);
-    circle(ball.x, ball.y, ball.d);
     //white walls
     fill(leftWall.color);
     rect(leftWall.x, leftWall.y, leftWall.w, leftWall.h);
