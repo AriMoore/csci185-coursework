@@ -1,5 +1,7 @@
 // inspired by: https://p5js.org/examples/motion-bouncy-bubbles.html
 
+var pause = false;
+
 const canvasWidth = window.innerWidth;
 const canvasHeight = window.innerHeight;
 
@@ -25,7 +27,7 @@ let speed = 15;
 let score = 0;
 let win = false;
 let lose = false;
-let level = 1;
+let level = 0;
 let brickcount = bricks.length;
 let x = 0;
 let y = 0;
@@ -58,6 +60,19 @@ function losereset() {
             }
         }
     }
+    fill('White');
+    text("Score: "+score, canvasWidth/1.5, canvasHeight/2);
+    textSize(22);
+    textFont('Helvetica');
+    textStyle(BOLD);
+    textAlign(CENTER, CENTER);
+    fill('White');
+    text("Level: "+level, canvasWidth/3, canvasHeight/2);
+    textSize(22);
+    textFont('Helvetica');
+    textStyle(BOLD);
+    textAlign(CENTER, CENTER);
+    document.querySelector("#lose").className = "hide";
     move(ball); 
     fill(ball.color);
     circle(ball.x, ball.y, ball.d);
@@ -80,6 +95,19 @@ function winreset() {
             }
         }
     }
+    fill('White');
+    text("Score: "+score, canvasWidth/1.5, canvasHeight/2);
+    textSize(22);
+    textFont('Helvetica');
+    textStyle(BOLD);
+    textAlign(CENTER, CENTER);
+    fill('White');
+    text("Level: "+level, canvasWidth/3, canvasHeight/2);
+    textSize(22);
+    textFont('Helvetica');
+    textStyle(BOLD);
+    textAlign(CENTER, CENTER);
+    document.querySelector("#win").className = "hide";
     move(ball); 
     fill(ball.color);
     circle(ball.x, ball.y, ball.d);
@@ -135,19 +163,8 @@ function draw() {
         textAlign(CENTER, CENTER);
         document.querySelector("#lose").className = "showlose";
         document.querySelector('#lose').style.left = canvasWidth/2 - 200 + "px";
-        fill('White');
-        text("Score: "+score, canvasWidth/3.4, canvasHeight/2);
-        text("Level: "+level, canvasWidth/1.4, canvasHeight/2);
-        textSize(22);
-        textFont('Helvetica');
-        textStyle(BOLD);
-        textAlign(CENTER, CENTER);
-        ball.x = 500;
-        ball.y = 550;
-        ball.speedX = 3;
-        ball.speedY = 3;
-        document.querySelector('#condition').className = 'gameactive'
-        losereset();       
+        noLoop();
+        setTimeout(() => {loop(); ball.x = 500; ball.y = 550; ball.speedX = 3; ball.speedY = 3; losereset(); console.log("starting again");}, 5000);    
     }
     else if (win == true) {
         fill('White');
@@ -157,19 +174,8 @@ function draw() {
         textStyle(BOLD);
         textAlign(CENTER, CENTER);
         document.querySelector("#win").className = "showwin";
-        fill('White');
-        text("Score: "+score, canvasWidth/3.4, canvasHeight/2);
-        text("Level: "+level, canvasWidth/1.4, canvasHeight/2.5);
-        textSize(22);
-        textFont('Helvetica');
-        textStyle(BOLD);
-        textAlign(CENTER, CENTER);
-        ball.x = 500;
-        ball.y = 550;
-        ball.speedX = 3;
-        ball.speedY = 3;
-        document.querySelector('#condition').className = 'gameactive'
-        winreset();
+        noLoop();
+        setTimeout(() => {loop(); ball.x = 500; ball.y = 550; ball.speedX = 3; ball.speedY = 3; winreset(); console.log("starting again");}, 5000);    
     }
     else {
         fill('White');
@@ -331,16 +337,16 @@ function moveCharacter(ev) {
 }
 
 function checkWinCondition(win, lose) {
-    if (win == true) {
+    if (win == true && lose != true) {
         document.querySelector('#message').innerHTML = 'You win!'
-        document.querySelector('#condition').className = ''
+        document.querySelector('#condition').className = 'win'
     }
-    else if (lose == true) {
+    else if (lose == true && win != true) {
         document.querySelector('#message').innerHTML = 'You lose!'
         document.querySelector('#condition').className = 'lose'
     }
     else {
-        document.querySelector('#message').innerHTML = ''
+        document.querySelector('#message').innerHTML = 'gameactive'
         document.querySelector('#condition').className = 'gameactive'
     }
 }

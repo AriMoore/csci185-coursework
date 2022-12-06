@@ -1,12 +1,18 @@
 body {
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     color: #fff;
+    overflow: hidden;
+    margin: 0px;
+    height: 100vh;
+    /* body tag is a grid */
+    display: grid;
+    grid-template-columns: 250px auto;
+    grid-template-rows: auto 100px;
 }
 a, a:hover, a:visited, a:active { 
     color: #fff;
     text-decoration: none;
 }
-
 * {
     box-sizing: border-box;
 }
@@ -18,49 +24,22 @@ aside, footer, header, nav, section, article {
     display: flex;
     flex-direction: column;
 }
-body {
-    overflow: hidden;
-    margin: 0px;
-    height: 100vh;
-    /* body tag is a grid */
-    display: grid;
-    grid-template-columns: 250px auto;
-    grid-template-rows: auto 100px;
-}
 aside {
     background-color: #000;
     grid-column-start: 1;
 }
-header {
-    background: #111;
-    position: sticky;
-    top: 0px;
-}
-
-/* Uncomment to see borders:  */
-header, nav, article {
-    border: solid 5px teal;
-    padding: 10px;
-}
-main {
-    border: solid 5px hotpink;
-    padding: 10px;
-}
-
 main {
     background: #111;
     grid-column-start: 2;
     overflow-y: auto;
     z-index: 3;
 }
-
 footer {
     background: #222;
     grid-row-start: 2;
     grid-column-start: 1;
     grid-column-end: span 2;
 }
-
 
 /***************************/
 /* Accessories & Florishes */
@@ -83,9 +62,72 @@ footer {
 /* Part A: Left Navigation */
 /***************************/
 
-/* Your Code Here */
+header {
+    background: #111;
+    position: sticky;
+    top: 0px;
+    list-style: none;
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    flex-direction: row;
+    padding-top: 20px;
+    padding-left: 0%;
+    padding-right: 20px;
+}
 
+a.topright, a.topright-background {
+    margin: 5px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: solid 2px #888;
+    border-radius: 500px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 
+a.topright-background {
+    border: solid 2px transparent;
+    background-color: #222;
+}
+
+nav.topmiddle {
+    list-style: none;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    flex-direction: row;
+    top: 0;
+    padding-left: 0%;
+    padding-right: 0%;
+    padding-bottom: 10px;
+}
+
+a.selected {
+    padding-right: 20px;
+}
+
+nav a, nav a:link {
+    border-bottom: solid 4px transparent;
+    padding: 10px;
+}
+
+nav a:hover, nav a:visited {
+    color: white;
+    text-decoration: none;
+    border-bottom: solid 4px lightgreen;
+}
+
+article {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.artist-card img {
+    width: 100%;
+}
 
 /********************************/
 /* Part B: Header & Nav Styling */
@@ -117,19 +159,22 @@ footer {
 /* Your Code Here */
 
 @media screen and (max-width: 1000px) {
-    /* 
-        Tablet Display: 3 cards per row!
-    
-    */
+    article {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 10px;
+        row-gap: 10px;
+    }
 }
 
 
 @media screen and (max-width: 700px) {
-    /* Mobile Display 
-        * 2 cards per row
-        * The aside panel and "Upgrade" button should no longer be visible.
-        * There should only be a 1-column layout.
-    */
+    article {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 10px;
+        row-gap: 10px;
+    }
 }
 
 

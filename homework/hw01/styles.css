@@ -7,10 +7,124 @@ body * {
 }
 
 body {
-    margin: 0;
+    margin: 0%;
+}
+
+header {
+    background-color: teal;
+    font-family: 'Roboto Slab', serif;
+}
+
+h1 {
+    color: white;
+}
+
+h2.aboutme {
+    font-family: 'Quicksand', sans-serif;
+    justify-content: left;
+    display: flex;
+    align-items: center;
+    list-style: none;
+    top: 0;
+    padding-left: 5%;
+    padding-right: 0%;
+}
+
+h2.projects {
+    font-family: 'Quicksand', sans-serif;
+    justify-content: left;
+    display: flex;
+    align-items: center;
+    list-style: none;
+    top: 0;
+    padding-left: 5%;
+    padding-right: 0%;
+}
+
+h2.touch {
+    font-family: 'Quicksand', sans-serif;
+    justify-content: left;
+    display: flex;
+    align-items: left;
+    list-style: none;
+    top: 0;
+    padding-left: 0%;
+    padding-right: 0%;
+}
+
+p.aboutme {
+    font-family: 'Quicksand', sans-serif;
+    justify-content: left;
+    display: flex;
+    align-items: center;
+    list-style: none;
+    top: 0;
+    padding-left: 5%;
+    padding-right: 0%;
+}
+
+#projects {
+    background-color: lightgray;
+}
+
+div.project-holder {
+    font-family: 'Quicksand', sans-serif;
+    justify-content: left;
+    display: grid;
+    align-items: center;
+    list-style: none;
+    top: 0;
+    padding-left: 15%;
+    padding-right: 15%;
+    grid-template-columns: 1fr 1fr;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    top: 0;
+    padding-left: 0%;
+    padding-right: 0%;
+    padding: 0%;
+}
+
+li {
+    margin: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover, a:visited {
+    color: blue;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+div.image {
+    background-color: teal;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    padding-left: 5%;
+    padding-right: 20px;
+    flex-direction: column;
+}
+
+div.image img {
+    border-radius: 50%;
 }
 
 #contact {
+    font-family: 'Quicksand', sans-serif;
     padding-left: 8.5%;
     padding-right: 8.5%;
 }
